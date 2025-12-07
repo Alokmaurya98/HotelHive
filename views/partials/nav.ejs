@@ -1,0 +1,80 @@
+<header class="bg-red-500 text-white p-6 shadow-lg">
+  <nav class="container mx-auto flex justify-between items-center">
+    <ul class="flex space-x-6 items-center">
+      <li>
+        <a
+          href="/"
+          class="<%= currentPage === 'index' ? 'bg-red-600 font-semibold' : 'hover:bg-red-400' %> py-2 px-4 rounded-lg transition duration-300 text-lg font-bold"
+          >✈ EliteStay</a
+        >
+      </li>
+      <%if (isLoggedIn) { %>
+        <%if (user && user.userType==="guest") { %>
+      <li>
+        <a
+          href="/homes"
+          class="<%= currentPage === 'Home' ? 'bg-red-600 font-semibold' : 'hover:bg-red-400' %> py-2 px-4 rounded-lg transition duration-300"
+          >🏠 Homes</a
+        >
+      </li>
+      <li>
+        <a
+          href="/favourites"
+          class="<%= currentPage === 'favourites' ? 'bg-red-600 font-semibold' : 'hover:bg-red-400' %> py-2 px-4 rounded-lg transition duration-300"
+          >❤️ Favourites</a
+        >
+      </li>
+      <li>
+        <a
+          href="/bookings"
+          class="<%= currentPage === 'bookings' ? 'bg-red-600 font-semibold' : 'hover:bg-red-400' %> py-2 px-4 rounded-lg transition duration-300"
+          >📅 Bookings</a
+        >
+      </li>
+      <% }else{ %>
+      <li>
+        <a
+          href="/host/host-home-list"
+          class="<%= currentPage === 'host-homes' ? 'bg-red-600 font-semibold' : 'hover:bg-red-400' %> py-2 px-4 rounded-lg transition duration-300"
+          >🏢 Host Homes</a
+        >
+      </li>
+      <li>
+        <a
+          href="/host/add-home"
+          class="<%= currentPage === 'addHome' ? 'bg-red-600 font-semibold' : 'hover:bg-red-400' %> py-2 px-4 rounded-lg transition duration-300"
+          >➕ Add Home</a
+        >
+      </li>
+      <% } %>
+      <% } %>
+    </ul>
+    <ul class="flex space-x-4 items-center">
+      <%if (!isLoggedIn) { %>
+      <li>
+        <a
+          href="/signup"
+          class="hover:bg-red-400 py-2 px-5 rounded-lg transition duration-300 border border-white hover:border-red-400"
+          >Sign Up</a>
+      </li>
+      <li>
+        <a
+          href="/login"
+          class="bg-red-600 hover:bg-red-700 py-2 px-5 rounded-lg transition duration-300 font-semibold"
+          >Login</a>
+      </li>
+      <% } else { %>
+      <li>
+        <form action="/logout" method="POST" style="display: inline;">
+          <button
+            type="submit"
+            class="hover:bg-red-400 py-2 px-5 rounded-lg transition duration-300 bg-red-600 border-none cursor-pointer text-white font-semibold"
+          >
+            Logout
+          </button>
+        </form>
+      </li>
+      <% } %>
+    </ul>
+  </nav>
+</header>
