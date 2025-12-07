@@ -1,10 +1,10 @@
-<header class="bg-red-500 text-white p-6 shadow-lg">
+<header class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white p-8 shadow-xl">
   <nav class="container mx-auto flex justify-between items-center">
     <ul class="flex space-x-6 items-center">
       <li>
         <a
           href="/"
-          class="<%= currentPage === 'index' ? 'bg-red-600 font-semibold' : 'hover:bg-red-400' %> py-2 px-4 rounded-lg transition duration-300 text-lg font-bold"
+          class="<%= currentPage === 'index' ? 'bg-gradient-to-r from-indigo-500 to-purple-500 font-semibold' : 'hover:bg-gradient-to-r from-indigo-400 to-purple-400' %> py-2 px-4 rounded-lg transition duration-300 text-lg font-bold"
           >✈ EliteStay</a
         >
       </li>
@@ -13,21 +13,21 @@
       <li>
         <a
           href="/homes"
-          class="<%= currentPage === 'Home' ? 'bg-red-600 font-semibold' : 'hover:bg-red-400' %> py-2 px-4 rounded-lg transition duration-300"
+          class="<%= currentPage === 'Home' ? 'bg-gradient-to-r from-indigo-500 to-purple-500 font-semibold' : 'hover:bg-gradient-to-r from-indigo-400 to-purple-400' %> py-2 px-4 rounded-lg transition duration-300"
           >🏠 Homes</a
         >
       </li>
       <li>
         <a
           href="/favourites"
-          class="<%= currentPage === 'favourites' ? 'bg-red-600 font-semibold' : 'hover:bg-red-400' %> py-2 px-4 rounded-lg transition duration-300"
+          class="<%= currentPage === 'favourites' ? 'bg-gradient-to-r from-indigo-500 to-purple-500 font-semibold' : 'hover:bg-gradient-to-r from-indigo-400 to-purple-400' %> py-2 px-4 rounded-lg transition duration-300"
           >❤️ Favourites</a
         >
       </li>
       <li>
         <a
           href="/bookings"
-          class="<%= currentPage === 'bookings' ? 'bg-red-600 font-semibold' : 'hover:bg-red-400' %> py-2 px-4 rounded-lg transition duration-300"
+          class="<%= currentPage === 'bookings' ? 'bg-gradient-to-r from-indigo-500 to-purple-500 font-semibold' : 'hover:bg-gradient-to-r from-indigo-400 to-purple-400' %> py-2 px-4 rounded-lg transition duration-300"
           >📅 Bookings</a
         >
       </li>
@@ -35,14 +35,14 @@
       <li>
         <a
           href="/host/host-home-list"
-          class="<%= currentPage === 'host-homes' ? 'bg-red-600 font-semibold' : 'hover:bg-red-400' %> py-2 px-4 rounded-lg transition duration-300"
+          class="<%= currentPage === 'host-homes' ? 'bg-gradient-to-r from-indigo-500 to-purple-500 font-semibold' : 'hover:bg-gradient-to-r from-indigo-400 to-purple-400' %> py-2 px-4 rounded-lg transition duration-300"
           >🏢 Host Homes</a
         >
       </li>
       <li>
         <a
           href="/host/add-home"
-          class="<%= currentPage === 'addHome' ? 'bg-red-600 font-semibold' : 'hover:bg-red-400' %> py-2 px-4 rounded-lg transition duration-300"
+          class="<%= currentPage === 'addHome' ? 'bg-gradient-to-r from-indigo-500 to-purple-500 font-semibold' : 'hover:bg-gradient-to-r from-indigo-400 to-purple-400' %> py-2 px-4 rounded-lg transition duration-300"
           >➕ Add Home</a
         >
       </li>
@@ -54,13 +54,13 @@
       <li>
         <a
           href="/signup"
-          class="hover:bg-red-400 py-2 px-5 rounded-lg transition duration-300 border border-white hover:border-red-400"
+          class="hover:bg-gradient-to-r from-indigo-400 to-purple-400 py-2 px-5 rounded-lg transition duration-300 border border-white"
           >Sign Up</a>
       </li>
       <li>
         <a
           href="/login"
-          class="bg-red-600 hover:bg-red-700 py-2 px-5 rounded-lg transition duration-300 font-semibold"
+          class="bg-gradient-to-r from-indigo-500 to-purple-500 hover:bg-gradient-to-r from-indigo-600 to-purple-600 py-2 px-5 rounded-lg transition duration-300 font-semibold"
           >Login</a>
       </li>
       <% } else { %>
@@ -68,7 +68,7 @@
         <form action="/logout" method="POST" style="display: inline;">
           <button
             type="submit"
-            class="hover:bg-red-400 py-2 px-5 rounded-lg transition duration-300 bg-red-600 border-none cursor-pointer text-white font-semibold"
+            class="hover:bg-gradient-to-r from-indigo-400 to-purple-400 py-2 px-5 rounded-lg transition duration-300 bg-gradient-to-r from-indigo-500 to-purple-500 border-none cursor-pointer text-white font-semibold"
           >
             Logout
           </button>
