@@ -1,17 +1,94 @@
 <%- include('../partials/head') %>
-  </head>
-  <body>
-    <%- include('../partials/nav') %>
-    <main class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center py-12 px-4">
-      <div class="w-full max-w-md">
-        <div class="bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-lg p-12 border border-gray-200 text-center">
-          <div class="mb-12">
-            <h2 class="text-4xl font-bold text-indigo-700 mb-4 shadow-lg">My Bookings</h2>
-            <div class="w-24 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto mb-6 rounded"></div>
-          </div>
-          <p class="text-xl text-gray-600 mb-8">Bookings will appear here</p>
-        </div>
+</head>
+<body class="bg-gradient-to-br from-slate-700 via-gray-500 to-slate-800 min-h-screen">
+  <%- include('../partials/nav') %>
+
+  <main class="container mx-auto mt-16 px-4 max-w-6xl">
+    <h1 class="text-3xl font-extrabold mb-8 tracking-wide
+               bg-gradient-to-r from-pink-300 via-purple-400 to-indigo-400
+               bg-clip-text text-transparent drop-shadow-xl">
+      My Bookings
+    </h1>
+
+    <% if (!bookings || bookings.length === 0) { %>
+      <div class="bg-gray-900/60 border border-gray-800 rounded-2xl shadow-2xl p-12 text-center">
+        <p class="text-gray-300 text-lg">You don't have any bookings yet.</p>
+        <a href="/homes" class="mt-6 inline-block px-6 py-3 rounded-full text-white font-semibold bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-md">
+          Browse Homes
+        </a>
       </div>
-    </main>
-  </body>
+    <% } else { %>
+      <div class="grid gap-8">
+        <% bookings.forEach(booking => { %>
+          <article class="bg-gradient-to-br from-white via-gray-50 to-gray-100 rounded-2xl shadow-2xl overflow-hidden border border-gray-200 flex flex-col md:flex-row">
+            
+            <!-- Photo (left on desktop) -->
+            <div class="md:w-1/3 h-56 md:h-auto relative">
+              <% if (booking.home && booking.home.photo) { %>
+                <img src="<%= booking.home.photo %>" alt="<%= booking.home.houseName %>" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+              <% } else { %>
+                <div class="w-full h-full bg-gray-200 flex items-center justify-center text-gray-500">
+                  No image
+                </div>
+              <% } %>
+            </div>
+
+            <!-- Content (right) -->
+            <div class="p-6 md:w-2/3 flex flex-col justify-between">
+              <div>
+                <h2 class="text-2xl font-bold text-gray-900 mb-1"><%= booking.home?.houseName || 'Unnamed Home' %></h2>
+                <p class="text-sm text-gray-600 mb-2"><i class="fas fa-map-marker-alt mr-2 text-red-500"></i><%= booking.home?.location || 'Unknown location' %></p>
+
+                <div class="flex flex-wrap gap-3 text-sm text-gray-700 mb-4">
+                  <div class="px-3 py-2 bg-gray-100 rounded-full">
+                    <span class="font-medium">Stay</span>
+                    <div class="text-xs text-gray-600">
+                      <%= booking.checkIn ? new Date(booking.checkIn).toLocaleDateString() : '-' %> — <%= booking.checkOut ? new Date(booking.checkOut).toLocaleDateString() : '-' %>
+                    </div>
+                  </div>
+
+                  <div class="px-3 py-2 bg-gray-100 rounded-full">
+                    <span class="font-medium">Guests</span>
+                    <div class="text-xs text-gray-600"><%= booking.guests %></div>
+                  </div>
+
+                  <div class="px-3 py-2 bg-gray-100 rounded-full">
+                    <span class="font-medium">Rooms</span>
+                    <div class="text-xs text-gray-600"><%= booking.rooms || 1 %></div>
+                  </div>
+
+                  <div class="px-3 py-2 bg-gray-100 rounded-full">
+                    <span class="font-medium">Status</span>
+                    <div class="text-xs <%= booking.status === 'confirmed' ? 'text-green-600' : (booking.status === 'pending' ? 'text-yellow-600' : 'text-red-600') %>">
+                      <%= booking.status.charAt(0).toUpperCase() + booking.status.slice(1) %>
+                    </div>
+                  </div>
+                </div>
+
+                <p class="text-gray-700"><strong>Special requests:</strong> <span class="text-gray-600"><%= booking.specialRequests || 'None' %></span></p>
+              </div>
+
+              <div class="mt-6 flex items-center justify-between gap-4">
+                <div>
+                  <div class="text-sm text-gray-500">Total</div>
+                  <div class="text-2xl font-extrabold text-gray-900">₹<%= booking.totalPrice %></div>
+                </div>
+
+                <div class="flex items-center gap-3">
+                  <a href="/booking/<%= booking._id %>" class="px-4 py-2 rounded-full bg-gray-800 text-white border border-gray-700 open-booking-modal">
+                    Details
+                  </a>
+                </div>
+              </div>
+            </div>
+
+          </article>
+        <% }) %>
+      </div>
+    <% } %>
+  </main>
+
+  <%- include('../partials/footer') %>
+</body>
 </html>

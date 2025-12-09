@@ -1,14 +1,23 @@
 <%- include('../partials/head') %>
-  </head>
-  <body>
-    <%- include('../partials/nav') %>
-    <main class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center py-12 px-4">
-      <div class="w-full max-w-md bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-lg p-12 border border-gray-200">
-        <h1 class="text-4xl font-bold mb-2 text-center text-indigo-700">Create Account</h1>
-        <p class="text-center text-gray-600 mb-8">Join us and start your journey</p>
-        
+</head>
+<body class="bg-gradient-to-br from-slate-700 via-gray-500 to-slate-800 min-h-screen">
+  <%- include('../partials/nav') %>
+
+  <main class="min-h-screen flex items-center justify-center py-12 px-4">
+    <div class="w-full max-w-md">
+      <div class="bg-gradient-to-br from-slate-900 via-gray-800 to-black rounded-2xl shadow-2xl p-8 border border-gray-800">
+        <div class="text-center mb-6">
+          <h1 class="text-3xl md:text-4xl font-extrabold mb-2
+                     bg-gradient-to-r from-pink-300 via-purple-400 to-indigo-400
+                     bg-clip-text text-transparent drop-shadow-xl">
+            Create Account
+          </h1>
+          <p class="text-sm text-gray-300">Join EliteStay and start hosting or booking</p>
+        </div>
+
         <form action="/signup" method="POST" class="space-y-5">
           <%- include('../partials/error') %>
+
           <!-- Name Row -->
           <div class="grid grid-cols-2 gap-4">
             <input
@@ -16,15 +25,15 @@
               type="text"
               name="firstName"
               placeholder="First Name"
-              value="<%= oldInput.firstName ? oldInput.firstName : '' %>"
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"/>
+              value="<%= oldInput && oldInput.firstName ? oldInput.firstName : '' %>"
+              class="w-full px-4 py-3 rounded-lg bg-white/5 border border-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"/>
             <input
               required
               type="text"
               name="lastName"
               placeholder="Last Name"
-              value="<%= oldInput.lastName ? oldInput.lastName : '' %>"
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"/>
+              value="<%= oldInput && oldInput.lastName ? oldInput.lastName : '' %>"
+              class="w-full px-4 py-3 rounded-lg bg-white/5 border border-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"/>
           </div>
 
           <!-- Email -->
@@ -33,8 +42,8 @@
             type="email"
             name="email"
             placeholder="Email Address"
-            value="<%= oldInput.email ? oldInput.email : '' %>"
-            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"/>
+            value="<%= oldInput && oldInput.email ? oldInput.email : '' %>"
+            class="w-full px-4 py-3 rounded-lg bg-white/5 border border-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"/>
 
           <!-- Password -->
           <input
@@ -42,7 +51,7 @@
             type="password"
             name="password"
             placeholder="Password"
-            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"/>
+            class="w-full px-4 py-3 rounded-lg bg-white/5 border border-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"/>
 
           <!-- Confirm Password -->
           <input
@@ -50,40 +59,50 @@
             type="password"
             name="confirmPassword"
             placeholder="Confirm Password"
-            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"/>
+            class="w-full px-4 py-3 rounded-lg bg-white/5 border border-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"/>
 
           <!-- User Type -->
-          <div class="bg-gradient-to-br from-gray-50 to-gray-100 p-4 rounded-lg border border-gray-200">
-            <p class="text-sm font-semibold text-gray-700 mb-3">Account Type</p>
-            <div class="space-y-3">
-              <label class="flex items-center cursor-pointer">
-                <input type="radio" name="userType" value="guest" id="guest"  class="w-4 h-4 text-indigo-500"
-                 <%= oldInput.userType === "guest" ? "checked" : "" %>>
-                <span class="ml-3 text-gray-700">Guest</span>
+          <div class="bg-gray-800/60 border border-gray-700 p-4 rounded-lg">
+            <p class="text-sm font-semibold text-gray-300 mb-3">Account Type</p>
+            <div class="flex gap-4">
+              <label class="flex items-center gap-3 cursor-pointer">
+                <input type="radio" name="userType" value="guest" id="guest"
+                       class="w-4 h-4 text-indigo-500 bg-gray-700 border-gray-600"
+                       <%= oldInput && oldInput.userType === "guest" ? "checked" : "" %> />
+                <span class="text-gray-300">Guest</span>
               </label>
-              <label class="flex items-center cursor-pointer">
-                <input type="radio" name="userType" value="host" id="host" class="w-4 h-4 text-indigo-500"
-                 <%= oldInput.userType === "host" ? "checked" : "" %>>
-                <span class="ml-3 text-gray-700">Host</span>
+
+              <label class="flex items-center gap-3 cursor-pointer">
+                <input type="radio" name="userType" value="host" id="host"
+                       class="w-4 h-4 text-indigo-500 bg-gray-700 border-gray-600"
+                       <%= oldInput && oldInput.userType === "host" ? "checked" : "" %> />
+                <span class="text-gray-300">Host</span>
               </label>
             </div>
           </div>
 
           <!-- Terms -->
-          <div class="flex items-start">
-            <input type="checkbox" name="terms" id="terms" required class="w-4 h-4 text-indigo-500 mt-1">
-            <label for="terms" class="ml-2 text-sm text-gray-600">I agree to the <span class="text-indigo-500 font-semibold">Terms and Conditions</span></label>
+          <div class="flex items-start gap-3">
+            <input type="checkbox" name="terms" id="terms" required class="w-4 h-4 text-indigo-500 bg-gray-700 border-gray-600 mt-1" />
+            <label for="terms" class="ml-1 text-sm text-gray-300">I agree to the <span class="text-indigo-300 font-semibold">Terms and Conditions</span></label>
           </div>
 
           <!-- Submit Button -->
           <input
             type="submit"
             value="Register"
-            class="w-full bg-gradient-to-r from-indigo-500 to-purple-500 text-white py-3 rounded-xl font-semibold hover:bg-gradient-to-r from-indigo-600 to-purple-600 transition duration-300 cursor-pointer mt-6"/>
+            class="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-lg font-semibold text-white
+                   bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-lg transform hover:scale-105 transition duration-300 cursor-pointer"/>
         </form>
 
-        <p class="text-center text-gray-600 text-sm mt-6">Already have an account? <a href="/login" class="text-indigo-500 font-semibold hover:underline">Sign In</a></p>
+        <p class="text-center text-sm text-gray-400 mt-6">
+          Already have an account?
+          <a href="/login" class="text-indigo-300 font-semibold hover:text-indigo-100 ml-1">Sign In</a>
+        </p>
       </div>
-    </main>
-  </body>
+    </div>
+  </main>
+
+  <%- include('../partials/footer') %>
+</body>
 </html>

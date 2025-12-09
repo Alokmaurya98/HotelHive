@@ -26,6 +26,12 @@ const userSchema = new mongoose.Schema({
     type: [mongoose.Schema.Types.ObjectId],
     ref: 'Home',
     default: []
-  }
+  },
+  Bookings: {
+  type: [mongoose.Schema.Types.ObjectId],
+  ref: "Booking",
+  default: []
+}
+
 });
 module.exports = mongoose.model("User", userSchema);

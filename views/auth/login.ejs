@@ -1,59 +1,66 @@
 <%- include('../partials/head') %>
 </head>
-<body>
+<body class="bg-gradient-to-br from-slate-700 via-gray-500 to-slate-800 min-h-screen">
   <%- include('../partials/nav') %>
-  <main class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 py-12 px-4">
+
+  <main class="min-h-screen flex items-center justify-center py-12 px-4">
     <div class="w-full max-w-md">
-      <div class="bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-lg p-12 border border-gray-200">
-        <div class="text-center mb-8">
-          <h1 class="text-4xl font-bold text-indigo-700 mb-2">Welcome Back</h1>
-          <p class="text-gray-600">Sign in to your account</p>
+      <div class="bg-gradient-to-br from-slate-900 via-gray-800 to-black rounded-2xl shadow-2xl p-10 border border-gray-800">
+        <div class="text-center mb-6">
+          <h1 class="text-4xl font-extrabold mb-2
+                     bg-gradient-to-r from-pink-300 via-purple-400 to-indigo-400
+                     bg-clip-text text-transparent drop-shadow-xl">
+            Welcome Back
+          </h1>
+          <p class="text-sm text-gray-300">Sign in to your EliteStay account</p>
         </div>
 
         <form action="/login" method="POST" class="space-y-5">
           <%- include('../partials/error') %>
-          
+
           <div>
-            <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
+            <label for="email" class="block text-sm font-medium text-gray-300 mb-2">Email Address</label>
             <input
               id="email"
               type="email"
               name="email"
-              placeholder="Enter your email"
+              placeholder="you@example.com"
               required
-              value="<%= oldInput.email ? oldInput.email : '' %>"
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition"
+              value="<%= oldInput?.email || '' %>"
+              class="w-full px-4 py-3 rounded-lg bg-white/5 border border-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
             />
           </div>
 
           <div>
-            <label for="password" class="block text-sm font-semibold text-gray-700 mb-2">Password</label>
+            <label for="password" class="block text-sm font-medium text-gray-300 mb-2">Password</label>
             <input
               id="password"
               type="password"
               name="password"
               placeholder="Enter your password"
               required
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition"
+              class="w-full px-4 py-3 rounded-lg bg-white/5 border border-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
             />
           </div>
 
           <button
             type="submit"
-            class="w-full bg-gradient-to-r from-indigo-500 to-purple-500 hover:bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold py-3 rounded-xl transition duration-300 mt-6"
-          >
+            class="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-lg font-semibold text-white
+                   bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-lg transform hover:scale-105 transition">
             Sign In
           </button>
         </form>
 
-        <div class="text-center mt-6 pt-6 border-t border-gray-200">
-          <p class="text-gray-600 text-sm">
+        <div class="text-center mt-6 pt-6 border-t border-gray-800">
+          <p class="text-sm text-gray-400">
             Don't have an account?
-            <a href="/signup" class="text-indigo-500 hover:text-indigo-600 font-semibold">Sign up</a>
+            <a href="/signup" class="text-indigo-300 hover:text-indigo-100 font-semibold ml-1">Sign up</a>
           </p>
         </div>
       </div>
     </div>
   </main>
+
+  <%- include('../partials/footer') %>
 </body>
 </html>

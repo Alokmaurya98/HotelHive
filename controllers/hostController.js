@@ -30,17 +30,24 @@ exports.getEditHome = (req, res, next) => {
   })
   
 };
-exports.getHostHomes = (req, res, next) => {
-  Home.find().then(registeredHomes=>{
-    res.render("host/host-home-list", {
-      registeredHomes: registeredHomes,
-      pageTitle: "Host Homes List",
-      currentPage: "host-homes",
-      isLoggedIn: req.isLoggedIn,
-    user: req.session.user,
-    })
-});
+exports.getHostHomes = async (req, res, next) => {
+  try {
+    if (!req.session?.user?._id) return res.redirect('/login');
+    const ownerId = req.session.user._id;
+
+    const homes = await Home.find({ owner: ownerId });
+    res.render('host/host-home-list', {
+      pageTitle: 'Host Homes',
+      currentPage: 'host-homes',
+      homes,
+      user: req.session.user,
+      isLoggedIn: req.isLoggedIn
+    });
+  } catch (err) {
+    next(err);
+  }
 };
+
 
 exports.postAddHome = (req, res, next) => {
   const { houseName, price, location, rating,description } = req.body;
@@ -50,7 +57,8 @@ exports.postAddHome = (req, res, next) => {
     return res.status(422).send("No image provided");
   }
   const photo = req.file.path;
-  const home = new Home({houseName, price, location, rating, photo,description});
+  const ownerId = req.session?.user?._id || null;
+  const home = new Home({houseName, price, location, rating, photo,description, owner: ownerId});
   home.save().then(()=>{
     console.log("Home Added Successfully");
   });
@@ -97,6 +105,7 @@ exports.postDeleteHome = (req, res, next) => {
     console.log("Error in deleting home",err);
   }
 )};
+
 
   
 

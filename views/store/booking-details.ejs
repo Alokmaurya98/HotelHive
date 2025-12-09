@@ -1,0 +1,146 @@
+<%- include('../partials/head') %>
+</head>
+<body class="bg-gradient-to-br from-slate-700 via-gray-500 to-slate-800 min-h-screen">
+  <%- include('../partials/nav') %>
+
+  <main class="container mx-auto bg-gradient-to-br from-slate-900 via-gray-800 to-black shadow-2xl rounded-2xl p-8 mt-16 max-w-4xl">
+
+    <!-- Hero / Title -->
+    <div class="text-center mb-6">
+      <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight
+                 bg-gradient-to-r from-pink-300 via-purple-400 to-indigo-400
+                 bg-clip-text text-transparent drop-shadow-xl">
+        Booking Details
+      </h1>
+      <p class="text-sm text-gray-300 mt-2">Review your reservation details below.</p>
+    </div>
+
+    <!-- Card -->
+    <div class="bg-gray-900/50 border border-gray-800 rounded-2xl shadow-xl overflow-hidden">
+      
+      <!-- Photo -->
+      <% if (home.photo) { %>
+        <div class="relative w-full h-64 overflow-hidden">
+          <img 
+            src="/<%= home.photo %>" 
+            alt="Home Photo"
+            class="w-full h-full object-cover"
+          >
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+
+          <div class="absolute left-6 bottom-6">
+            <span class="inline-block px-3 py-1 rounded-full bg-black/50 text-white text-sm font-semibold">
+              <%= home.location %>
+            </span>
+          </div>
+        </div>
+      <% } %>
+
+      <div class="p-6 md:p-8 grid grid-cols-1 gap-6">
+
+        <!-- Title + Meta -->
+        <div>
+          <h2 class="text-2xl md:text-3xl font-bold text-white mb-1"><%= home.houseName || home.name %></h2>
+          <div class="flex items-center gap-3 text-sm text-gray-300">
+
+            <div class="flex items-center gap-2">
+              <svg class="w-5 h-5 text-yellow-400" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 17.27L18.18 21 16.54 13.97 22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/>
+              </svg>
+              <span class="font-medium text-gray-200"><%= home.rating %></span>
+            </div>
+
+            <div class="text-gray-500">•</div>
+
+            <div class="text-gray-300">
+              Rs <span class="font-semibold text-white"><%= home.price %></span> / night
+            </div>
+          </div>
+        </div>
+
+        <!-- Booking details grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+          <div class="bg-gray-800/60 border border-gray-700 rounded-xl p-4">
+            <p class="text-xs text-gray-400">Guest</p>
+            <p class="text-white font-semibold mt-1"><%= booking.fullname %></p>
+          </div>
+
+          <div class="bg-gray-800/60 border border-gray-700 rounded-xl p-4">
+            <p class="text-xs text-gray-400">Email</p>
+            <p class="text-white font-semibold mt-1"><%= booking.email %></p>
+          </div>
+
+          <div class="bg-gray-800/60 border border-gray-700 rounded-xl p-4">
+            <p class="text-xs text-gray-400">Phone</p>
+            <p class="text-white font-semibold mt-1"><%= booking.phone %></p>
+          </div>
+
+          <div class="bg-gray-800/60 border border-gray-700 rounded-xl p-4">
+            <p class="text-xs text-gray-400">Guests</p>
+            <p class="text-white font-semibold mt-1"><%= booking.guests %></p>
+          </div>
+
+          <div class="bg-gray-800/60 border border-gray-700 rounded-xl p-4">
+            <p class="text-xs text-gray-400">Check-in</p>
+            <p class="text-white font-semibold mt-1"><%= booking.checkIn ? booking.checkIn.toDateString() : '-' %></p>
+          </div>
+
+          <div class="bg-gray-800/60 border border-gray-700 rounded-xl p-4">
+            <p class="text-xs text-gray-400">Check-out</p>
+            <p class="text-white font-semibold mt-1"><%= booking.checkOut ? booking.checkOut.toDateString() : '-' %></p>
+          </div>
+
+        </div>
+
+        <!-- More details -->
+        <div class="bg-gray-800/60 border border-gray-700 rounded-xl p-4">
+
+          <div class="mt-3">
+            <p class="text-xs text-gray-400">Rooms</p>
+            <p class="text-white font-semibold mt-1"><%= booking.rooms || 1 %></p>
+          </div>
+
+          <div class="mt-3">
+            <p class="text-xs text-gray-400">Special Requests</p>
+            <p class="text-gray-200 mt-1"><%= booking.specialRequests || 'None' %></p>
+          </div>
+        </div>
+
+        <!-- Price + status -->
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+
+          <div>
+            <p class="text-xs text-gray-400">Total Price</p>
+            <p class="text-2xl font-extrabold text-white mt-1">₹<%= booking.totalPrice %></p>
+          </div>
+
+          <div class="flex items-center gap-3">
+
+            <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold
+              <%= booking.status === 'confirmed' 
+                    ? 'bg-green-600 text-white' 
+                    : booking.status === 'pending'
+                      ? 'bg-yellow-500 text-black' 
+                      : 'bg-red-600 text-white' %>">
+              <%= booking.status.charAt(0).toUpperCase() + booking.status.slice(1) %>
+            </span>
+
+            <a href="/bookings"
+               class="inline-block px-5 py-2 rounded-full text-white font-semibold 
+                      bg-gradient-to-r from-blue-600 to-purple-600 
+                      hover:from-blue-700 hover:to-purple-700 shadow-md 
+                      transition-transform duration-200 transform hover:scale-105">
+              Back to Bookings
+            </a>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <%- include('../partials/footer') %>
+</body>
+</html>
