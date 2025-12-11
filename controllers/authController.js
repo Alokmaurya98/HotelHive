@@ -111,7 +111,6 @@ exports.getSignup = (req, res, next) => {
 ];
 exports.postLogin = async (req, res, next) => { 
   const {email, password} = req.body;
-  console.log(email,password);
   const user = await User.findOne({email});
 if (!user) {
   return res.status(422).render("auth/login", {
@@ -141,7 +140,6 @@ req.session.save(err => {
   if (err) {
     console.log(err);
   }
-  console.log("SESSION isLoggedIn =", req.session.isLoggedIn); // should log true
   res.redirect("/");
 });
 };
@@ -149,5 +147,4 @@ exports.postLogout = (req, res, next) => {
   req.session.destroy(()=>{
  res.redirect("/login");
   });
-  console.log("User logged out successfully");
 }

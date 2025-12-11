@@ -54,11 +54,6 @@
                   </div>
 
                   <div class="px-3 py-2 bg-gray-100 rounded-full">
-                    <span class="font-medium">Rooms</span>
-                    <div class="text-xs text-gray-600"><%= booking.rooms || 1 %></div>
-                  </div>
-
-                  <div class="px-3 py-2 bg-gray-100 rounded-full">
                     <span class="font-medium">Status</span>
                     <div class="text-xs <%= booking.status === 'confirmed' ? 'text-green-600' : (booking.status === 'pending' ? 'text-yellow-600' : 'text-red-600') %>">
                       <%= booking.status.charAt(0).toUpperCase() + booking.status.slice(1) %>
