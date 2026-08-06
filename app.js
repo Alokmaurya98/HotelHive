@@ -2,14 +2,19 @@
 const path = require('path');
 require("dotenv").config();
 
+const dns = require('dns');
 
+// Use Google's and Cloudflare's DNS servers for resolution
+dns.setServers([
+  '8.8.8.8',   // Google DNS
+  '8.8.4.4',   // Google DNS secondary
+  '1.1.1.1'    // Cloudflare DNS
+]);
 // External Module
 const express = require('express');
 const session = require('express-session');
 const connectMongo = require('connect-mongo');
 const multer = require('multer');
-
-// yaha smart resolve:
 const MongoStore = connectMongo.default || connectMongo.MongoStore || connectMongo;
 const DB_PATH = process.env.MONGO_URI;
 
